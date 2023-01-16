@@ -67,3 +67,35 @@ interface UserI{
 
 const u : UserI = {firstname : 'Toto', lastname: 'Lala', age:25};
 const u2 : UserI = {firstname : 'Tata', lastname: 'Bar'}
+
+
+//------------------------------------------------------------------------------------------
+//spread operator
+
+const user : User{
+    firstname : 'Toto',
+    lastname : 'Lala',
+    age : 25
+};
+
+const userWithAddress : UserWithAddress = {
+    ...user,
+    address : '1 rue de truc',
+    city : "Ouais"
+}
+
+//------------------------------------------------------------------------------------------
+//spread operator
+
+const user = {
+    firstname : 'Toto',
+    lastname : 'Lala',
+    age : 25
+};
+
+const {firstname, lastname, ...infos}= user;
+
+console.log (firstname)// Toto
+console.log (lastname)// Lala
+console.log (age)// 25
+
