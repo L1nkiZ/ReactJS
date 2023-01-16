@@ -1,3 +1,8 @@
+interface Mediatheque{
+    nom : string,
+    ville : string
+}
+
 type mediatheque = 'livres' | 'films' | 'jeux';
 
 interface media {
