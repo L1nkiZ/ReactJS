@@ -13,21 +13,20 @@ const CharactersList : React.FC = () =>
         <h1>
             Characters List
         </h1>
-        <ul>
-            {characters.map((c : Character) =>
-            <li>
-                {c.id}
-                {c.name}
+        {characters.map((c : Character) =>
+            <div className="card">
                 <img 
-                    style={{ maxWidth :'500px', maxHeight:'500px' }} 
-                    alt={c.name} 
-                    src={c.imageURL}>
+                    src={c.imageURL}
+                    alt="Avatar" 
+                    style={{ width: '100%', maxWidth: '500px'}}
+                    >
                 </img>
-            </li>
-            )}
-        </ul>
-        
+                <div className="container">
+                    <p>{c.id}</p>
+                    <h4><b>{c.name}</b></h4>
+                </div>
+            </div>
+        )}
     </div>
 
 export default CharactersList;
-
