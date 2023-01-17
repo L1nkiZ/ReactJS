@@ -99,3 +99,4 @@ console.log (firstname)// Toto
 console.log (lastname)// Lala
 console.log (age)// 25
 
+

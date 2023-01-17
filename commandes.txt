@@ -1,0 +1,2 @@
+npm run start --> pour lancer l'appli 
+npx create-react-app app-test --template typescript --> pour créer un nouveau projet
