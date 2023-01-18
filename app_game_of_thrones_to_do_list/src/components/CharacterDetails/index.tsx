@@ -24,7 +24,8 @@ const CharacterDetails: React.FC<Props> =
       </img>
       <div className="container">
           <p>{id}</p>
-          <h4>{name} {family} {title}</h4>
+          <h2>{name} {family}</h2>
+          <h4>{title}</h4>
           
       </div>
   </div>
