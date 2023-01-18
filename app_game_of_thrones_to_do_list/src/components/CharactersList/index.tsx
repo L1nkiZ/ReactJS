@@ -32,36 +32,42 @@ const characters:Character[] = [
 
 const CharactersList : React.FC = () => {
     
+
     const [SelectedCharacter, setSelectedCharacter] = useState<Character>();
    
     {
         SelectedCharacter ?
         'Personnage séléctionné :' + SelectedCharacter.titre :
-        'Pas de personnage séléctionné' 
+        'Pas de per sonnage séléctionné' 
     }
-    return (
-    <div>
-        <h1>
-            Liste de personnages de Game Of Thrones
-        </h1>
-        <p>
 
-        </p>
-        {characters.map((c : Character) =>
-            <div className="card" onClick={() => setSelectedCharacter(c)}>
-                <img 
-                    src={c.imageURL}
-                    alt="Avatar" 
-                    style={{ width: '100%'}}
-                    >
-                </img>
-                <div className="container">
-                    <p>{c.id}</p>
-                    <h4><b>{c.name}</b></h4>
+    return (
+            
+        <>
+            <h1>
+                Liste de personnages de Game Of Thrones
+            </h1>
+            <p>
+                {
+                    <SelectedCharacter && <CharacterDetails character={selectedCharacter} />
+                }
+            </p>
+            {characters.map((c : Character) =>
+                <div className="card" onClick={() => setSelectedCharacter(c)}>
+                    <img 
+                        src={c.imageURL}
+                        alt="Avatar" 
+                        style={{ width: '100%'}}
+                        >
+                    </img>
+                    <div className="container">
+                        <p>{c.id}</p>
+                        <h4>{c.name}</h4>
+                        
+                    </div>
                 </div>
-            </div>
-        )}
-    </div>
+            )}
+        </>
     )
 }
 
