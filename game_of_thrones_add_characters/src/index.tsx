@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Template from './components/Template';
+import CharactersList from './pages/CharactersList';
+import './style.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -8,5 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
+    <CharactersList />
   </React.StrictMode>
 );

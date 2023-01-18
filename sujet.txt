@@ -1,0 +1,13 @@
+Exercice
+Créez la base de l'application Game of Thrones Characters :
+
+Créez un composant CharactersList affichant:
+Un titre
+Une liste statique de personnages de Game of Thrones avec pour chacun
+
+Un ID
+Un nom
+Une image
+
+Les personnages doivent pour l'instant être créés dans un tableau "global"
+Créez une structure de donnée représentant ces personnages
