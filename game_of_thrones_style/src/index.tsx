@@ -4,6 +4,7 @@ import CharactersList from './pages/CharactersList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import CharacterDetails from './pages/CharacterDetails';
+import './style.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -21,20 +21,21 @@ const CharacterDetails = () => {
       const {name, title, family, imageUrl} = character;
 
       return (
-        <div>
-          <img
-            style={{maxWidth: '100px', maxHeight: '100px'}}
-            alt={name}
-            src={imageUrl}
-          />
-          <ul>
-            <li>ID: {id}</li>
-            <li>Name: {name}</li>
-            <li>Title: {title}</li>
-            <li>Family: {family}</li>
-          </ul>
-          <Link to="/characters">Go back to list</Link>
+        <div className="card">
+            <img 
+                src={imageUrl}
+                alt="Avatar" 
+                style={{ width: '100%'}}
+                >
+            </img>
+            <div className="container">
+                <p>{id}</p>
+                <h2>{name} {family}</h2>
+                <h4>{title}</h4>
+            </div>
+            <Link to="/characters">Go back to list</Link>
         </div>
+
       );
     }
     else {

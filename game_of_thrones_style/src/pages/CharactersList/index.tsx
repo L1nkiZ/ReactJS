@@ -1,9 +1,10 @@
 import { Character } from '../../models/Character';
 import { useState } from 'react';
-import CharacterDetails from '../../components/CharacterDetails';
 import AddCharacterForm from './components/AddCharacterForm';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const staticCharacters: Character[] = [
+export const staticCharacters: Character[] = [
   Character(0, 
     'Arya Stark', 
     'https://resize-parismatch.lanmedia.fr/var/pm/public/media/image/2022/03/04/01/Game-of-Thrones-mais-au-fait-qui-se-trouve-sur-la-liste-macabre-d-Arya-Stark.jpg', 
@@ -27,30 +28,29 @@ const staticCharacters: Character[] = [
     'https://www.beaboss.fr/Assets/Img/BREVE/2019/4/339304/Game-Thrones-quelle-entrepreneure-serait-Daenerys-Targaryen--F.jpg', 
     'Princesse Khaleesi, Mère des Dragons, Reine de Meeren, Daenerys du Typhon, l\'Imbrûlée, Mhysa, Briseuse de chaînes', 
     'Targaryen'
-  )
+  ),
 ];
 
 const CharactersList: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>(staticCharacters);
-  const [selectedCharacter, setSelectedCharacter] = useState<Character>();
+  const navigate = useNavigate();
 
   const onAddCharacter = (c: Character) => {
     setCharacters(characters.concat(c));
   };
+
   return (
     <div>
+      <Link to="/">Accueil</Link>
       <h1>Liste de Personnage de Game of Thrones</h1>
 
       <AddCharacterForm
         idNextCharacter={characters.length}
         onAddCharacter={onAddCharacter}
       />
-
-      {selectedCharacter &&
-        <CharacterDetails character={selectedCharacter} />
-      }
-        {characters.map((c: Character) =>
-          <div className="card" onClick={() => setSelectedCharacter(c)}>
+      
+      {characters.map((c: Character) =>
+          <div className="card" onClick={() => navigate('/character/' + c.id)}>
               <img 
                   src={c.imageUrl}
                   alt={c.name} 
