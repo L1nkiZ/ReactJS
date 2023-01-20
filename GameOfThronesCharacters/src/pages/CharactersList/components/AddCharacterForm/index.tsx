@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Character } from '../../../../models/Character';
+import { useAppDispatch, useAppSelector } from '../../../../store';
+import { addCharacter } from '../../../../reducers/characters/reducer';
 
-interface Props {
-  idNextCharacter: number,
-  onAddCharacter: (c: Character) => void
-}
+const AddCharacterForm: React.FC = (props) => {
+  const dispatch = useAppDispatch();
 
-const AddCharacterForm: React.FC<Props> = (props) => {
+  const idNextCharacter = useAppSelector((state) => state.characters.list.length);
+
   const [nameToAdd, setNameToAdd] = useState('');
   const [titleToAdd, setTitleToAdd] = useState('');
   const [familyToAdd, setFamilyToAdd] = useState('');
@@ -18,17 +19,17 @@ const AddCharacterForm: React.FC<Props> = (props) => {
     nameInputRef?.current?.focus();
   }, []);
 
-  const addCharacter = () => {
+  const onAddCharacter = () => {
     const characterToAdd =
       Character(
-        props.idNextCharacter,
+        idNextCharacter,
         nameToAdd,
         imageURLToAdd,
         titleToAdd,
         familyToAdd
       );
 
-    props.onAddCharacter(characterToAdd);
+    dispatch(addCharacter(characterToAdd));
   };
 
   return (
@@ -58,13 +59,13 @@ const AddCharacterForm: React.FC<Props> = (props) => {
         type="text"
         onKeyUp={(e) => {
           if (e.key === 'Enter')
-            addCharacter();
+            onAddCharacter();
         }}
         onChange={(e) => setImageURLToAdd(e.target.value)}
       /><br/>
       <br/>
 
-      <button onClick={() => addCharacter()}>
+      <button onClick={() => onAddCharacter()}>
         Add
       </button>
     </div>

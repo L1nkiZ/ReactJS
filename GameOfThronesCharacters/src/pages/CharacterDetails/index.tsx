@@ -1,57 +1,45 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { staticCharacters } from '../CharactersList';
-import { Character, CharacterAPI } from '../../models/Character';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { Character } from '../../models/Character';
 import Loader from '../../components/Loader';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { fetchCharacters } from '../../reducers/characters/reducer';
 
 const CharacterDetails = () => {
-  const [character, setCharacter] = useState<Character>();
-  const [loading, setLoading] = useState(true);
-
   const params = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { list, isFetchingCharacters } = useAppSelector((state) => state.characters);
 
   const id = Number(params.id);
+
+  const character: Character | undefined =
+    isNaN(id) ?
+      undefined :
+      list.find((c: Character) => c.id === id);
 
   useEffect(() => {
     if (isNaN(id)) {
       navigate('/characters');
     }
-    else {
-      axios.get<CharacterAPI>('https://thronesapi.com/api/v2/Characters/' + id)
-        .then((res) => {
-          const char = res.data;
-
-          setCharacter(
-            Character(
-              char.id,
-              char.fullName,
-              char.imageUrl,
-              char.title,
-              char.family
-            )
-          );
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
+    else if (list.length <= 0) {
+      dispatch(fetchCharacters());
     }
   }, []);
 
   return (
     <div>
-      {loading && <Loader />}
+      {isFetchingCharacters && <Loader />}
 
-      {!loading && !character &&
+      {!isFetchingCharacters && !character &&
         <div>
           Unknown character<br/>
           <Link to="/characters">Go back to list</Link>
         </div>
       }
 
-      {!loading && character &&
+      {!isFetchingCharacters && character &&
         <div>
           <img
             style={{maxWidth: '100px', maxHeight: '100px'}}
